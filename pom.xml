@@ -93,11 +93,12 @@
 		</dependency>
 		
 		<!-- EhCache - para implementacao de cache na aplicacao melhorando a performance -->
+		<!-- 
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
 		</dependency>
-		
+		 -->
 	</dependencies>
 
 	<build>

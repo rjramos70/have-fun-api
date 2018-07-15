@@ -1,10 +1,13 @@
 package com.havefun.api.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.chrono.IsoChronology;
 import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,6 +20,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import com.havefun.api.converters.LocalDateConverter;
 import com.havefun.api.enums.TypeOfRoleEnum;
 
 @Entity
@@ -32,6 +36,7 @@ public class Person implements Serializable{
 	private String identification_document;
 	private TypeOfRoleEnum type_of_role;
 	private List<Address> addresses;
+	private LocalDate birthday;
 	private Date creation_date;
 	private Date updated_date;
 	
@@ -111,6 +116,22 @@ public class Person implements Serializable{
 	
 	public void setAddress(Address address) {
 		this.addresses.add(address);
+	}
+
+	@Column( name = "birthday", nullable = false)
+	@Convert( converter = LocalDateConverter.class )
+	public LocalDate getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(LocalDate birthday) {
+		this.birthday = birthday;
+	}
+	
+	public int getAge() {
+		return this.birthday
+				   .until(IsoChronology.INSTANCE.dateNow())
+				   .getYears();
 	}
 
 	@Column( name = "creation_date")

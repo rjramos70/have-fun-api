@@ -133,6 +133,14 @@ public class Person implements Serializable{
 				   .until(IsoChronology.INSTANCE.dateNow())
 				   .getYears();
 	}
+	
+	public static int compareByAge(Person a, Person b) {
+		return a.birthday.compareTo(b.birthday);
+	}
+	
+	public static int compareByName(Person a, Person b) {
+		return a.name.compareTo(b.name);
+	}
 
 	@Column( name = "creation_date")
 	public Date getCreation_date() {

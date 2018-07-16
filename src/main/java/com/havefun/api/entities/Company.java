@@ -30,7 +30,7 @@ public class Company implements Serializable {
 	private String cnpj;
 	private String social_name;
 	private Address address;
-	private List<String> phoneList;
+	private String phone;
 	private String email;
 	private Person responsible;
 	private List<Event> eventList;
@@ -78,13 +78,13 @@ public class Company implements Serializable {
 		this.address = address;
 	}
 
-	@OneToMany( mappedBy = "company", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-	public List<String> getPhoneList() {
-		return phoneList;
+	@Column( name = "phone", nullable = false )
+	public String getPhoneList() {
+		return this.phone;
 	}
 
-	public void setPhoneList(List<String> phoneList) {
-		this.phoneList = phoneList;
+	public void setPhoneList(String phone) {
+		this.phone = phone;
 	}
 	
 	@Column( name = "email", nullable = false )
@@ -129,7 +129,7 @@ public class Company implements Serializable {
 	@Override
 	public String toString() {
 		return "Company [id=" + id + ", cnpj=" + cnpj + ", social_name=" + social_name + ", address=" + address
-				+ ", phoneList=" + phoneList + ", email=" + email + ", responsible=" + responsible + ", eventList="
+				+ ", phone=" + phone + ", email=" + email + ", responsible=" + responsible + ", eventList="
 				+ eventList + ", creation_date=" + creation_date + ", updated_date=" + updated_date + "]";
 	}
 	
